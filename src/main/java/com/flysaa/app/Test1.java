@@ -1,5 +1,6 @@
 package com.flysaa.app;
 
+import java.util.ArrayList;
 import java.time.*;
 import java.util.Scanner;
 import com.flysaa.people.Person;
@@ -12,13 +13,15 @@ import com.flysaa.airline.Flight;
 public class Test1  {
 public Test1 () {}
 
+static ArrayList < Integer > set = new ArrayList<>();
 static int a = 0;
 public static void main(String[] args) {
 Scanner scan = new Scanner(System.in);
-Employee[] emps = new Employee[2];
-Customer[] cust = new Customer[20];
-Flight[] flights = new Flight[5];
-int[] seats = new int[20];
+ArrayList < Employee > emps = new ArrayList < Employee >();
+ArrayList < Customer > cust = new ArrayList < Customer >();
+ArrayList < Flight > flights = new ArrayList < Flight >();
+ArrayList < Integer > seats = new ArrayList < Integer > (20);
+
 Customer cus = null;
 Payment pay = new Payment();
 Employee emp = null;
@@ -28,7 +31,7 @@ LocalDateTime depatureDate = null, arrivalDate = null;
  ZonedDateTime depatureTimeZone = null, arrivaltimeZone = null;  
      
     for(int i = 1; i < 100; i++) {  
-        int option = 0,f=0,e=0,q=0;
+        int option = 0;
                     for(;;) {
                     scan.nextLine();
                     try{
@@ -76,13 +79,12 @@ LocalDateTime depatureDate = null, arrivalDate = null;
                         }
                         }// to catch exception for password when registring rmployee
 emp.register(name,phoneNumber, dateOfBirth, idNumber, nationality, emailAddress, position, username, password);
-emps[a] = emp;
-a++;
-emp.display();
+emps.add(emp);
+System.out.println(emp);  
             } //end of option 1
         
             if(option == 2) {
-                    for(int c = 0; c < emps.length; c++) {
+                    for(int c = 0; c < emps.size(); c++) {
                System.out.println();
                System.out.println(" \tLOGIN ");        
                 System.out.println();
@@ -100,12 +102,10 @@ emp.display();
                             System.out.println("Please enter password.");
                             }
                             }
-                  for(int b = 0; b < emps.length; b++) {
-                   if(uname.equals(emps[b].getUsername()) && pass == (emps[b].getPassword())){
-                   System.out.println("\t\t\tWELCOME TO FLYSAA" + emps[b].getName());
-                        for(int z = 0; z < cust.length; z++){
-           // cus = new Customer();
-            //ticket = new FlightTicket();
+                  for(int b = 0; b < emps.size(); b++) {
+                   if(uname.equals(emps.get(b).getUsername()) && pass == (emps.get(b).getPassword())){
+                   System.out.println("\t\t\tWELCOME TO FLYSAA" + emps.get(b).getName());
+                        for(int z = 0; z < 20; z++){
             int choice = 0; 
                                     for(;;) {
                                     scan.nextLine();
@@ -169,7 +169,7 @@ emp.display();
                         	  minut = scan.nextInt();
                               arrivalDate = LocalDateTime.of(year, month, day, hour, minut);
                               System.out.println(arrivalDate);
-scan.nextLine();
+                                scan.nextLine();
                                  System.out.print("Enter continent: ");
                              continent = scan.nextLine();
                                 System.out.print("Enter present country : ");
@@ -177,9 +177,8 @@ scan.nextLine();
                              arrivaltimeZone = ZonedDateTime.of(arrivalDate,ZoneId.of(continent+"/"+country));
                               System.out.println(arrivaltimeZone);
 flight.addFlight(flightNumber, flightName, from, to, depatureDate, arrivalDate, depatureTimeZone, arrivaltimeZone);
-flights[f] = flight;
-f++;
-//cus.flight = flight;                
+flights.add(flight);
+System.out.println(flight);                
                               }//end o choice 1
                               else if(choice == 2){
  cus = new Customer();
@@ -213,34 +212,19 @@ ticket = new FlightTicket();
                                             System.out.println("please enter number for your pin : ");
                                             }
                                             }
-                                System.out.println("Enter destination :"+ flights[nums].getTo());
-                                String destination = flights[nums].getTo();
-                                System.out.println("Enter Depature date :"+ flights[nums].getDepatureDate());
-                                LocalDateTime tDepatureDate = flights[nums].getDepatureDate();
-                                System.out.println("Depature time zone : " + flights[nums].getDepatureTimeZone());
-                                ZonedDateTime tdepatureTimeZone = flights[nums].getDepatureTimeZone();
-                                System.out.println("arrivalTime zone : " + flights[nums].getArrivaltimeZone());
-                                ZonedDateTime tarrivaltimeZone = flights[nums].getArrivaltimeZone();
-                                System.out.println("Enter Arrival Date :" +flights[nums].getArrivalDate());
-                                LocalDateTime tArrivalDate = flights[nums].getArrivalDate();
-                            //System.out.println("Enter ticket number :" + flights[nums].getFlightNumber());
-                              String ticketNumber = flights[nums].getFlightNumber();
-                           /*/  System.out.print("\nEnter flightNumber :" + flights[nums].getFlightNumber());
-                              String flightNumber = flights[nums].getFlightNumber();
-                            //  System.out.println("\nEnter name :" + flights[nums].getFlightName());
-                              String flightName = flights[nums].getFlightName();
-                            //  System.out.print("\nEnter from :" + flights[nums].getFrom());
-                              String from = flights[nums].getFrom();
-                            //  System.out.print("\nEnter to :" + flights[nums].getTo());
-                              String to = flight.getTo();
-                            //  System.out.print("\nEnter depature date :" +  flights[nums].getDepatureDate());
-                               depatureDate =  flights[nums].getDepatureDate();
-                            //  System.out.print("\nEnter arrival date :" + flights[nums].getArrivalDate());
-                                depatureTimeZone = flights[nums].getDepatureTimeZone();
-                               arrivalDate = flights[nums].getArrivalDate();
-                                arrivaltimeZone = flights[nums].getArrivaltimeZone();*/
+                                System.out.println("Enter destination :"+ flights.get(nums).getTo());
+                                String destination = flights.get(nums).getTo();
+                                System.out.println("Enter Depature date :"+ flights.get(nums).getDepatureDate());
+                                LocalDateTime tDepatureDate = flights.get(nums).getDepatureDate();
+                                System.out.println("Depature time zone : " + flights.get(nums).getDepatureTimeZone());
+                                ZonedDateTime tdepatureTimeZone = flights.get(nums).getDepatureTimeZone();
+                                System.out.println("arrivalTime zone : " + flights.get(nums).getArrivaltimeZone());
+                                ZonedDateTime tarrivaltimeZone = flights.get(nums).getArrivaltimeZone();
+                                System.out.println("Enter Arrival Date :" +flights.get(nums).getArrivalDate());
+                                LocalDateTime tArrivalDate = flights.get(nums).getArrivalDate();
+                              String ticketNumber = flights.get(nums).getFlightNumber();
                               int seatNumber = 0;
-                    for (int p = 0; p < 20; p++) {
+                   for (int p = 0; p < 20; p++) {
                     flight.avaliableSeats(seats);
                                                  for(;;) {
                                                     scan.nextLine();
@@ -260,6 +244,15 @@ ticket = new FlightTicket();
 			       System.out.println("After Continue");
                    break;
                   }
+/*flight.seats();
+for (int q = 0; q < 5; q++) {
+
+		
+			flight.avaSeat(set);
+			System.out.print("\nSelect Seat : ");
+			seatNumber = scan.nextInt();
+			set.remove(seatNumber);
+}*/
                    String type = null;
                    int num = 0;//scan.nextInt();
                    invalid:for(;;){
@@ -292,10 +285,9 @@ ticket = new FlightTicket();
                                             } 
                                        }                                                          
 
-cus.bookTicket(ticket, name, pin, phoneNumber, dateOfBirth, idNumber, nationality, emailAddress, seatNumber, type,ticketNumber, tDepatureDate, tArrivalDate, destination ,tdepatureTimeZone, tarrivaltimeZone); // flights, flightNumber, flightName, from, to, depatureDate, arrivalDate, nums, pin, depatureTimeZone, arrivaltimeZone);
-cust[e] = cus;
-e++;
-cus.display();
+cus.bookTicket(ticket, name, pin, phoneNumber, dateOfBirth, idNumber, nationality, emailAddress, seatNumber, type,ticketNumber, tDepatureDate, tArrivalDate, destination ,tdepatureTimeZone, tarrivaltimeZone); 
+cust.add(cus);
+System.out.println(cus);  
                  } //end of choice 2
                            else if(choice == 3){
                             System.out.println("\tCANCEL TICKET ");
@@ -343,7 +335,7 @@ cus.display();
                 } //end of loop c
             }//end of option 2                               
             if(option == 0) {
-            i = 500;
+           i = 500;
             } // end of option 0
     } //end of for loop i
 }

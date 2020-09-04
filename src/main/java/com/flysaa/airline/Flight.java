@@ -3,6 +3,8 @@ package com.flysaa.airline;
 import java.time.*;
 import java.util.Date;
 import com.flysaa.people.Customer;
+import java.util.ArrayList;
+
 public class Flight {
 
 private String flightNumber;
@@ -13,12 +15,11 @@ private LocalDateTime depatureDate;
 private LocalDateTime arrivalDate;
 private ZonedDateTime depatureTimeZone;
 private ZonedDateTime arrivaltimeZone;
-//public  int[] seats = new int[20];
 public Customer cus;
 public FlightTicket ticket;
-
-
-public Flight() {}
+public static ArrayList < Integer > set = new ArrayList<>();
+public Flight() {
+}
 
 public String getFlightNumber(){
 return flightNumber;
@@ -79,60 +80,63 @@ this.arrivaltimeZone = arrivaltimeZone;
         this.setDepatureTimeZone(depatureTimeZone);
         this.setArrivaltimeZone(arrivaltimeZone);
         } // add flight ends here
-        public void displayFlight(){
-        System.out.println("<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>");
-         System.out.println("Name =" + this.getFlightName());
-          System.out.println("Flight Number =" + this.getFlightNumber());
-          System.out.println("From =" + this.getFrom());
-         System.out.println("To = " + this.getTo());
-         System.out.println("Depature Date =" + this.getDepatureDate());
-         System.out.println(" D Time Zone =" + this.getDepatureTimeZone());
-         System.out.println("Arrival Date =" + this.getArrivalDate());
-         System.out.println(" A Time Zone =" + this.getArrivaltimeZone());
-         System.out.println("<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>");
-        } // display flight ends here
 
- public void displayFlight(Flight [] flights){ // method overloading
-        for(int n = 0; n < flights.length; n++){
-            if(flights[n] != null){
+ public void displayFlight(ArrayList < Flight > flights){ // method overloading
+        for(int n = 0; n < flights.size(); n++){
+            if(flights.get(n) != null){
         System.out.println(n + ". <<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>");
-         System.out.println("name =" + flights[n].getFlightName());
-          System.out.println("flightNumber =" + flights[n].getFlightNumber());
-          System.out.println("from =" + flights[n].getFrom());
-         System.out.println("to = " + flights[n].getTo());
-         System.out.println("DepatureDate =" + flights[n].getDepatureDate());
-         System.out.println("Depature Time Zone =" + flights[n].getDepatureTimeZone());
-         System.out.println("ArrivalDate =" + flights[n].getArrivalDate());
-          System.out.println("Arrival Time Zone =" + flights[n].getArrivaltimeZone());
+         System.out.println("name =" + flights.get(n).getFlightName());
+          System.out.println("flightNumber =" + flights.get(n).getFlightNumber());
+          System.out.println("from =" + flights.get(n).getFrom());
+         System.out.println("to = " + flights.get(n).getTo());
+         System.out.println("DepatureDate =" + flights.get(n).getDepatureDate());
+         System.out.println("Depature Time Zone =" + flights.get(n).getDepatureTimeZone());
+         System.out.println("ArrivalDate =" + flights.get(n).getArrivalDate());
+          System.out.println("Arrival Time Zone =" + flights.get(n).getArrivaltimeZone());
          System.out.println("<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>");
             }
         }
         } // display flight ends here
-    public void avaliableSeats(int[] seats){
+/*public static void seats(){
+                    for (int i = 1; i < 20; i++) {
+			             set.add(i);
+		}
+ }      
+
+public static void avaSeat(ArrayList<Integer> seats) {
+
+		for (int i = 0; i < seats.size(); i++) {
+			if (seats.get(i) != 0) {
+				System.out.print(seats.get(i) + " | ");
+			}
+		}
+		System.out.println();
+	}*/     
+   public void avaliableSeats(ArrayList < Integer > seats){
         System.out.println("\n<<<<<<<<<<<< AVAILABLE SEATS >>>>>>>>>>>>>>>>");
-        //for(int n = 0; n < flights.length; n++){
-        for(int m = 0; m < seats.length; m++) {
-            if(seats[m] == 0){
-            System.out.print(m + 1 + " | ");
+        for(int m = 0; m < seats.size(); m++) {
+            if(seats.get(m) == 0){
+            System.out.print(seats.get(m) + " | ");
             }
         }
-//break;
-        //}
     }
-     public String chooseSeatNumber(int[] seats, FlightTicket ticket, int seatNumber) {
-         //for(int n = 0; n < flights.length; n++){
-        for(int m = 0; m < seats.length; m++){
-            if(seats[seatNumber - 1] == 0){
+     public String chooseSeatNumber(ArrayList < Integer > seats, FlightTicket ticket, int seatNumber) {
+        for(int m = 0; m < seats.size(); m++){
+            if(seats.get(seatNumber - 1) == 0){
             ticket.setSeatNumber(seatNumber);
-            seats[seatNumber - 1] = seatNumber;
+           //seats(seatNumber - 1) = seatNumber;
             break;
             }else{
                 return "Seat Already Take";
 
 		   }
 	   }
-//break;
-        //}
                 	return null;
     }
+    
+    public String toString(){
+        return "\nFlight Name: " + getFlightName() + "\nFlight Number: " + getFlightNumber() + "\nFrom: " + getFrom() + 
+"\nTo: " + getTo() + "\nDepature Time Zone: " + getDepatureTimeZone() + "\nArrival Time Zone: " + getArrivaltimeZone();
+    }
+
 }

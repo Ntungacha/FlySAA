@@ -1,5 +1,6 @@
 package com.flysaa.people;
 
+import java.util.ArrayList;
 
 public class Employee extends Person {
 
@@ -28,7 +29,7 @@ public void setPassword(int password) {
 this.password = password;
 }
 
-    public void register(String name, String phoneNumber, String dateOfBirth, String idNumber, String nationality, String emailAddress,                                           String position, String username, int password) {
+    public void register(String name, String phoneNumber, String dateOfBirth, String idNumber, String nationality, String emailAddress, String position, String username, int password) {
         this.setName(name);  
         this.setPhoneNumber(phoneNumber);
         this.setDateOfBirth(dateOfBirth);
@@ -39,19 +40,9 @@ this.password = password;
         this.setUsername(username);
         this.setPassword(password);
     } // register method ends here
-
-      public void display() {
-                System.out.println("------------------------------------------------");
-                System.out.println("name=" + this.getName());
-                System.out.println("username=" + this.getUsername());
-                System.out.println("password=" + this.getPassword());
-                System.out.println("idNumber=" + this.getIdNumber());
-                System.out.println("emailAddress=" + this.getEmailAddress());
-                System.out.println("nationality=" + this.getNationality());
-                System.out.println("position=" + this.getPosition());
-                System.out.println("dateOfBirth=" + this.getDateOfBirth());
-                System.out.println("phoneNumber=" + this.getPhoneNumber());
-                System.out.println("---------------------------------------------------");
-            } // display method ends here
+        
+     public String toString(){
+        return "\nEmployee name : " + getName() + "\nusername: " + getUsername() + "\npassword: " + getPassword() +                 "\nidNumber: " + getIdNumber() + "\nEmail Address: " + getEmailAddress() + "\nNationality: " + getNationality() +                   "\nDate Of Birth: " + getDateOfBirth() + "\nPhone Number: " + getPhoneNumber() + "\nPosition: " + getPosition();    
+    }
 
 } // end of class Employee
